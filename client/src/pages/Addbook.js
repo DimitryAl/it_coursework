@@ -1,0 +1,72 @@
+import React, {useState} from 'react'
+import { useHttp } from '../hooks/http.hook'
+
+export const Addbook = () => {
+    
+    const {loading, request} = useHttp()
+
+    const [form, setForm] = useState( {
+        title:'', author:'', genre:''
+    })
+
+    const changeHandler = event => {
+        setForm({ ...form, [event.target.name]: event.target.value })
+    }
+
+    const addingHandler = async() => {
+        try{
+            const data = await request('/api/book/add', "POST", {...form})
+        } catch (e) {}
+    }
+
+    return (
+        <div classname='row'>
+            <div classname='col s6 offset-s3'> 
+                <h1> Добавить книгу </h1>
+                <div classname="card blue-grey darken-1">
+                    <div classname="card-content white-text">
+                        <span classname="card-title"> Нажмите кнопку "Добавить", чтобы добавить книгу в БД. </span>
+                        <div>
+                            <div classname="input-title">
+                                <input 
+                                    placeholder="Введите название" 
+                                    id="title" 
+                                    type="text" 
+                                    name="title"
+                                    onChange={changeHandler}
+                                />
+                                {/* <label htmlfor="title"></label> */}
+                            </div>
+                            <div class="input-author">
+                                <input 
+                                    placeholder="Имя автора"
+                                    id="author" 
+                                    type="text" 
+                                    name="author"
+                                    onChange={changeHandler}
+                                />
+                                {/* <label for="last_name"></label> */}
+                            </div>
+                            <div class="input-genre">
+                                <input 
+                                    placeholder="Жанр"
+                                    id="genre" 
+                                    type="text" 
+                                    name="genre"
+                                    onChange={changeHandler}
+                                />
+                                {/* <label for="last_name"></label> */}
+                            </div>
+                        </div>
+                        <button 
+                            class="waves-effect waves-red btn-large red darken-4" 
+                            onClick={addingHandler}
+                            disabled={loading}>
+                            <i class="material-icons left">add</i>Добавить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
