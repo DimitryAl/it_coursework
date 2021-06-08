@@ -54,7 +54,6 @@ export const Addbook = () => {
                                 {/* <label for="last_name"></label> */}
                             </div>
                             <div class="input-genre">
-                                <label> Жанр </label>
                                 <select 
                                     class="browser-default"
                                     id="genre"
@@ -69,6 +68,8 @@ export const Addbook = () => {
                                     <option value="Образование"> Образование </option>
                                     <option value="Психология"> Психология </option>
                                 </select>
+                                <label> <p></p> </label>
+
                                 {/* <input 
                                     placeholder="Жанр"
                                     id="genre" 
