@@ -3,6 +3,8 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import {Booklist} from './pages/Booklist'
 import {Addbook} from './pages/Addbook'
 import {Myinfo} from './pages/Info'
+import {Edit} from './pages/Editbook'
+
 
 export const useRoutes = () => {
     return (
@@ -15,6 +17,8 @@ export const useRoutes = () => {
             </Route>
             <Route path='/myinfo' exact>
                 <Myinfo />
+            </Route>
+            <Route path='/edit' render={props => (<Edit {...props}/>)} exact> 
             </Route>
             <Redirect to="/books"/>
         </Switch>
