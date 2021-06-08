@@ -17,8 +17,10 @@ router.get('/list', async (req, res) => {
 // /api/books/delete
 router.delete('/delete', async (req, res) => {
     try {
+        
         const { bookId } = req.body
         const result = await Book.findByIdAndDelete(bookId)
+        
         res.json(result)
     } catch (e) {
         res.status(500).json({ message: e.message})
