@@ -6,7 +6,7 @@ export const Myinfo = () => {
     return (
         <div class="row">
             <div class="col  m6">
-                <div class="card">
+                <div class="card left">
                     <div class="card-image">
                         <img src={logo}/>
                         <span class="card-title "></span>
@@ -20,6 +20,7 @@ export const Myinfo = () => {
                             <a href="https://github.com/DimitryAl" class="waves-effect waves-red btn red darken-4"> Мой GitHub</a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

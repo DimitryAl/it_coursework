@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
+import { Preload } from '../components/preloader'
 
 export const Addbook = () => {
     
@@ -19,13 +20,18 @@ export const Addbook = () => {
         } catch (e) {}
     }
 
+    if (loading) {
+        return (
+            <Preload />
+        )
+    } else
     return (
         <div classname='row'>
             <div classname='col s6 offset-s3'> 
                 <h1> Добавить книгу </h1>
                 <div classname="card blue-grey darken-1">
                     <div classname="card-content white-text">
-                        <span classname="card-title"> Нажмите кнопку "Добавить", чтобы добавить книгу в БД. </span>
+                        <span classname="card-title"> Нажмите кнопку "Добавить", чтобы добавить книгу на сервер. </span>
                         <div>
                             <div classname="input-title">
                                 <input 
@@ -48,18 +54,33 @@ export const Addbook = () => {
                                 {/* <label for="last_name"></label> */}
                             </div>
                             <div class="input-genre">
-                                <input 
+                                <label> Жанр </label>
+                                <select 
+                                    class="browser-default"
+                                    id="genre"
+                                    type="text"
+                                    name="genre"
+                                    onChange={changeHandler}
+                                    >
+                                    <option value="" disabled selected>Выберете жанр</option>
+                                    <option value="Художественная литература"> Художественная литература </option>
+                                    <option value="Наука и техника"> Наука и техника </option>
+                                    <option value="Философия и религия"> Философия и религия </option>
+                                    <option value="Образование"> Образование </option>
+                                    <option value="Психология"> Психология </option>
+                                </select>
+                                {/* <input 
                                     placeholder="Жанр"
                                     id="genre" 
                                     type="text" 
                                     name="genre"
                                     onChange={changeHandler}
-                                />
+                                /> */}
                                 {/* <label for="last_name"></label> */}
                             </div>
                         </div>
                         <button 
-                            class="waves-effect waves-red btn-large red darken-4" 
+                            class="waves-effect waves-red btn-large red darken-4 " 
                             onClick={addingHandler}
                             disabled={loading}>
                             <i class="material-icons left">add</i>Добавить
