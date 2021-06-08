@@ -10,6 +10,7 @@ const PORT = config.get('Port')
 app.use(express.json({ extended:true }))
 app.use('/api/book', require('./routes/adding.routes'))
 app.use('/api/books', require('./routes/listing.routes'))
+app.use('/api/book/edit', require('./routes/adding.routes'))
 
 async function start() {
     try {
