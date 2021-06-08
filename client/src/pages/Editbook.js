@@ -7,9 +7,10 @@ export const Edit = (props) => {
 
     const {loading, request} = useHttp()
 
-    const {title, author, genre} = props.location.bookinfo
+    const {id, title, author, genre} = props.location.bookinfo
 
     const [form, setForm] = useState({
+        id: id,
         title: title,
         author: author,
         genre: genre
@@ -30,7 +31,7 @@ export const Edit = (props) => {
     } else
     return (
         <div class="row">
-            <div class="col s12 m6">
+            <div class="col s12 m10">
                 <div class="card white">
                     <div class="card-content ">
                         <span class="card-title">Изменение данных книги</span>
@@ -63,11 +64,11 @@ export const Edit = (props) => {
                                     name="genre"
                                     onChange={changeHandler}
                                     >
-                                    <option value="" disabled selected>Выберете жанр</option>
+                                    <option value="" disabled selected>{genre}</option>
                                     <option value="Художественная литература"> Художественная литература </option>
                                     <option value="Наука и техника"> Наука и техника </option>
                                     <option value="Философия и религия"> Философия и религия </option>
-                                    <option value="Образование"> Образование </option>
+                                    <option value="Искусство"> Искусство </option>
                                     <option value="Психология"> Психология </option>
                                 </select>
                                 <label> Жанр </label>

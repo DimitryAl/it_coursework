@@ -6,10 +6,10 @@ const router = Router()
 router.put('/edit', async (req, res) => {
     try {
         
-        const { title, author, genre } = req.body
-        const book = await Book.findOne({ title })
-        
+        const { id, title, author, genre } = req.body
 
+        const book = await Book.findById(id)
+        
         if (!book) {
             return res.status(400).json({ message: 'There are no such book!' })
         }

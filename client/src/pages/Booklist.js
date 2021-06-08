@@ -13,13 +13,19 @@ export const Booklist = () => {
             const fetched = await request('api/books/list', 'GET')
             setBooks(fetched)
         } catch (e) {
-
         }
     }, [request])
 
     useEffect(() => {
         fetchBooks()
     }, [])
+
+    const deleteHandler = async (event) => {
+        try {
+            const bookId = event.target.value
+            const data = await request('api/books/delete', 'DELETE', {bookId})
+        } catch (e) {}
+    }
 
     if (loading) {
         return (
@@ -55,6 +61,7 @@ export const Booklist = () => {
                             <Link to={{
                                 pathname:'/edit',
                                 bookinfo: {
+                                    id:book._id,
                                     title:book.title,
                                     author:book.author,
                                     genre:book.genre
@@ -62,19 +69,23 @@ export const Booklist = () => {
                             }}>
                             <button 
                                 class="waves-effect waves-red btn-small red darken-4 " 
-                                // disabled={loading}>
-                                >
+                                disabled={loading}>
                                 <i class="material-icons left">edit</i>Изменить
                             </button>
                             </Link>
                         </td>
                         <td> 
-                        <button 
-                            class="waves-effect waves-red btn-small red darken-4 " 
-                            // disabled={loading}>
-                            >
-                            <i class="material-icons left">delete</i>Удалить
+                            <button 
+                                class="waves-effect waves-red btn-small red darken-4 " 
+                                class="btn"
+                                disabled={loading}
+                                value={book._id}
+                                onClick={deleteHandler}
+                                >
+                                <i class="material-icons left">delete</i>
+                                Удалить
                             </button>
+                            
                         </td>
                     </tr>
                     )
