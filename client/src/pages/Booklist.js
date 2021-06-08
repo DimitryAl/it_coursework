@@ -53,7 +53,12 @@ export const Booklist = () => {
                         <td>{book.genre}</td>
                         <td>
                             <Link to={{
-                                pathname:'/edit'
+                                pathname:'/edit',
+                                bookinfo: {
+                                    title:book.title,
+                                    author:book.author,
+                                    genre:book.genre
+                                }
                             }}>
                             <button 
                                 class="waves-effect waves-red btn-small red darken-4 " 
