@@ -65,7 +65,7 @@ export const Addbook = () => {
                                     <option value="Художественная литература"> Художественная литература </option>
                                     <option value="Наука и техника"> Наука и техника </option>
                                     <option value="Философия и религия"> Философия и религия </option>
-                                    <option value="Образование"> Образование </option>
+                                    <option value="Искусство"> Искусство </option>
                                     <option value="Психология"> Психология </option>
                                 </select>
                                 <label> <p></p> </label>
