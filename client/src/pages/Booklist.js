@@ -41,13 +41,17 @@ export const Booklist = () => {
     const filterHandler = useCallback(async (event) => {
         setFilter(event.target.value)
         
-        console.log('filtering by: ', event.target.value)
-
         try {
-            const fetched = await request(`/api/books/${event.target.value}`, 'GET')
-            setBooks(fetched)
             
-            console.log('Recieve body: ', fetched)
+            if (event.target.value == "") {
+                const fetched = await request('/api/books/list', 'GET')
+                setBooks(fetched)
+                console.log('Recieve body: ', fetched)
+            } else {
+                const fetched = await request(`/api/books/${event.target.value}`, 'GET')
+                setBooks(fetched)
+                console.log('Recieve body: ', fetched)
+            }
 
         } catch (e) { }
 

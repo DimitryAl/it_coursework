@@ -35,7 +35,7 @@ router.get('/:filter', async (req, res) => {
 
         const books = await Book.find({genre: req.params.filter})
 
-        console.log('books: ', books)
+        console.log('all documents by this genre: ', books)
 
         res.json(books)
     } catch (e) {
