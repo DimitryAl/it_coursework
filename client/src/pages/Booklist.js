@@ -8,6 +8,10 @@ export const Booklist = () => {
     const {loading, request} = useHttp()
     const [books, setBooks] = useState([])
 
+    const [isValid, setIsValid] = useState(false)
+    const [sort, setSort] = useState({by:''})
+    const [filter, setFilter] = useState('') 
+
     const fetchBooks = useCallback( async () => {
         try {
             const fetched = await request('api/books/list', 'GET')
@@ -27,19 +31,59 @@ export const Booklist = () => {
         } catch (e) {}
     }
 
+    // sortHandler = (event) => {
+    //     setSort({...sort, by: event.target.value})
+
+    //     console.log('Sorting by:', sort.by)
+
+    // }
+
+    const filterHandler = useCallback(async (event) => {
+        setFilter(event.target.value)
+        
+        console.log('filtering by: ', event.target.value)
+
+        try {
+            const fetched = await request(`/api/books/${event.target.value}`, 'GET')
+            setBooks(fetched)
+            
+            console.log('Recieve body: ', fetched)
+
+        } catch (e) { }
+
+    }, [request])
+
     if (loading) {
         return (
             <Preload />
         )
     }
 
-    if (!books.length) {
-        return <h1 className="center"> Книг пока нет </h1>
-      }
+    // if (!books.length) {
+    //     return <h1 className="center"> Книг пока нет </h1>
+    //   }
 
     return (
         <div classname="row">
             <h3> Книги в библиотеке </h3>
+            <div class='col s3'>
+                <label>Фильтр по жанру</label>
+                    <select class="browser-default"
+                        type='text'
+                        id='genre-filter'
+                        name='genre-filter'
+                        onChange={filterHandler}
+                        defaultValue={filter}>
+                        <option value="" disabled selected>Фильтровать по жанру</option>
+                        <option value="">Без фильтра</option>
+                        <option value="Художественная литература"> Художественная литература </option>
+                        <option value="Наука и техника"> Наука и техника </option>
+                        <option value="Философия и религия"> Философия и религия </option>
+                        <option value="Искусство"> Искусство </option>
+                        <option value="Психология"> Психология </option>
+                    </select>
+            </div>
+            
             <table>
                 <thead>
                 <tr>

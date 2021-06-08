@@ -27,4 +27,19 @@ router.delete('/delete', async (req, res) => {
     }
 })
 
+
+router.get('/:filter', async (req, res) => {
+    try {
+        
+        console.log('req.params.filter: ', req.params.filter)
+
+        const books = await Book.find({genre: req.params.filter})
+
+        console.log('books: ', books)
+
+        res.json(books)
+    } catch (e) {
+        res.status(500).json({message:e.message})
+    }
+})
 module.exports = router
